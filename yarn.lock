@@ -5693,6 +5693,11 @@ react-native-gradle-plugin@^0.0.7:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.7.tgz#96602f909745239deab7b589443f14fce5da2056"
   integrity sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==
 
+react-native-track-player@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-3.0.0.tgz#dfde2f7f05f464dd77c6e01faf99b1b3ddc0c8d7"
+  integrity sha512-iYPh25+VWvTaz2Aija8H9L8A0RP1hhFS+svDo+J7AcamjyXzrvN0zpMHyawLVzGLs6OSMeqjAphjEKykZDhLQw==
+
 react-native@0.69.4:
   version "0.69.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.69.4.tgz#d66f2a117442a9398b065876afdc568b209dc4da"

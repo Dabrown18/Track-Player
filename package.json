@@ -16,7 +16,8 @@
     "eventemitter3": "^4.0.7",
     "lodash": "^4.17.21",
     "react": "18.0.0",
-    "react-native": "0.69.4"
+    "react-native": "0.69.4",
+    "react-native-track-player": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

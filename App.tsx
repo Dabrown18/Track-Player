@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Button, SafeAreaView, StyleSheet, Switch, Text, View } from "react-native";
-import Player from "./src/Player";
-import Recorder from "./src/Recorder";
-import Slider from "@react-native-community/slider";
-import TrackPlayer, { Capability, State, usePlaybackState, useProgress } from "react-native-track-player";
+import React, {useEffect} from 'react';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import Slider from '@react-native-community/slider';
+import TrackPlayer, {
+  Capability,
+  State,
+  usePlaybackState,
+  useProgress,
+} from 'react-native-track-player';
 
 var track = {
   url: 'https://consumer-static-assets.stg.ableto.com/meditations/27_calm_breathe.mp3', // Load media from the network
@@ -13,7 +22,7 @@ var track = {
   genre: 'Progressive House, Electro House',
   date: '2014-05-20T07:00:00+00:00', // RFC 3339
   artwork: 'http://example.com/cover.png', // Load artwork from the network
-  duration: 402 // Duration in seconds
+  duration: 402, // Duration in seconds
 };
 
 const tracks = [
@@ -25,7 +34,7 @@ const tracks = [
     genre: 'Progressive House, Electro House',
     date: '2014-05-20T07:00:00+00:00', // RFC 3339
     artwork: 'http://example.com/cover.png', // Load artwork from the network
-    duration: 402 // Duration in seconds
+    duration: 402, // Duration in seconds
   },
   {
     url: 'https://consumer-static-assets.stg.ableto.com/meditations/27_calm_breathe.mp3', // Load media from the network
@@ -35,7 +44,7 @@ const tracks = [
     genre: 'Progressive House, Electro House',
     date: '2014-05-20T07:00:00+00:00', // RFC 3339
     artwork: 'http://example.com/cover.png', // Load artwork from the network
-    duration: 402 // Duration in seconds
+    duration: 402, // Duration in seconds
   },
   {
     url: 'https://consumer-static-assets.stg.ableto.com/meditations/27_calm_breathe.mp3', // Load media from the network
@@ -45,7 +54,7 @@ const tracks = [
     genre: 'Progressive House, Electro House',
     date: '2014-05-20T07:00:00+00:00', // RFC 3339
     artwork: 'http://example.com/cover.png', // Load artwork from the network
-    duration: 402 // Duration in seconds
+    duration: 402, // Duration in seconds
   },
   {
     url: 'https://consumer-static-assets.stg.ableto.com/meditations/27_calm_breathe.mp3', // Load media from the network
@@ -55,7 +64,7 @@ const tracks = [
     genre: 'Progressive House, Electro House',
     date: '2014-05-20T07:00:00+00:00', // RFC 3339
     artwork: 'http://example.com/cover.png', // Load artwork from the network
-    duration: 402 // Duration in seconds
+    duration: 402, // Duration in seconds
   },
   {
     url: 'https://consumer-static-assets.stg.ableto.com/meditations/27_calm_breathe.mp3', // Load media from the network
@@ -65,10 +74,9 @@ const tracks = [
     genre: 'Progressive House, Electro House',
     date: '2014-05-20T07:00:00+00:00', // RFC 3339
     artwork: 'http://example.com/cover.png', // Load artwork from the network
-    duration: 402 // Duration in seconds
+    duration: 402, // Duration in seconds
   },
-
-]
+];
 
 const setUpPlayer = async () => {
   await TrackPlayer.setupPlayer();
@@ -80,7 +88,7 @@ const setUpPlayer = async () => {
   });
 };
 
-const togglePlayback = async (playbackState) => {
+const togglePlayback = async playbackState => {
   const currentTrack = await TrackPlayer.getCurrentTrack();
   console.log('current track: ', currentTrack);
 
@@ -91,74 +99,16 @@ const togglePlayback = async (playbackState) => {
       await TrackPlayer.pause();
     }
   }
-}
+};
 
 const App = () => {
   const playbackState = usePlaybackState();
   const progress = useProgress();
-  console.log('Playback state: ', playbackState);
-
-  let player: Player | null;
-  let recorder: Recorder | null;
-  let lastSeek: number;
-  let _progressInterval: IntervalID;
-
-  const [playPauseButton, setPlayPauseButton] =
-    useState<string>('Preparing...');
-  const [recordButton, setRecordButton] = useState<string>('Preparing...');
-  const [stopButtonDisabled, setStopButtonDisabled] = useState<boolean>(true);
-  const [playButtonDisabled, setPlayButtonDisabled] = useState<boolean>(true);
-  const [recordButtonDisabled, setRecordButtonDisabled] =
-    useState<boolean>(true);
-  const [loopButtonStatus, setLoopButtonStatus] = useState<boolean>(false);
-  const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
     setUpPlayer();
     return () => TrackPlayer.destroy();
   }, []);
-
-
-
-  const _updateState = () => {
-    // setPlayPauseButton(() => (player && player.isPlaying ? 'Pause' : 'Play'));
-    // setRecordButton(() =>
-    //   recorder && recorder.isRecording ? 'Stop' : 'Record',
-    // );
-    // setStopButtonDisabled(() => !player || !player.canStop);
-    // setPlayButtonDisabled(
-    //   () => !player || !player.canPlay || recorder.isRecording,
-    // );
-    // setRecordButtonDisabled(() => !recorder || (player && !player.isStopped));
-  };
-
-  const _playPause = () => {
-
-  };
-
-  const _stop = () => {
-
-  };
-
-  const _seek = percentage => {
-
-  };
-
-  const _reloadPlayer = () => {
-
-  };
-
-  const _reloadRecorder = () => {
-
-  };
-
-  const _requestRecordAudioPermission = async () => {
-
-  };
-
-  const _toggleLooping = value => {
-
-  };
 
   return (
     <SafeAreaView>
@@ -171,24 +121,10 @@ const App = () => {
           // disabled={state.playButtonDisabled}
           onPress={() => togglePlayback(playbackState)}
         />
-        <Button
-          title={'Stop'}
-          disabled={stopButtonDisabled}
-          onPress={() => _stop()}
-        />
-      </View>
-      <View style={styles.settingsContainer}>
-        <Switch
-          onValueChange={value => _toggleLooping(value)}
-          value={loopButtonStatus}
-        />
-        <Text>Toggle Looping</Text>
       </View>
       <View style={styles.slider}>
         <Slider
           step={0.0001}
-          disabled={playButtonDisabled}
-          onValueChange={percentage => _seek(percentage)}
           value={progress.position}
           minimumValue={0}
           maximumValue={progress.duration}
@@ -197,17 +133,16 @@ const App = () => {
           }}
         />
       </View>
-      <View>
-        <Text style={styles.errorMessage}>{error}</Text>
-      </View>
-
       <Text>
-        Beginning: {new Date(progress.position * 1000).toISOString().substr(14, 5)}
+        Beginning:{' '}
+        {new Date(progress.position * 1000).toISOString().substr(14, 5)}
       </Text>
       <Text>
-        Ending: {new Date((progress.duration - progress.position) * 1000).toISOString().substr(14, 5)}
+        Ending:{' '}
+        {new Date((progress.duration - progress.position) * 1000)
+          .toISOString()
+          .substr(14, 5)}
       </Text>
-
     </SafeAreaView>
   );
 };

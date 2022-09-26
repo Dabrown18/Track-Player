@@ -23,7 +23,7 @@ export const PlaybackCategories = {
   Playback: 1,
   Ambient: 2,
   SoloAmbient: 3,
-}
+};
 
 const defaultPlayerOptions = {
   autoDestroy: true,
@@ -46,14 +46,19 @@ class Player extends EventEmitter {
       this._options = defaultPlayerOptions;
     } else {
       // Make sure all required options have values
-      if (options.autoDestroy == null)
+      if (options.autoDestroy == null) {
         options.autoDestroy = defaultPlayerOptions.autoDestroy;
-      if (options.continuesToPlayInBackground == null)
-        options.continuesToPlayInBackground = defaultPlayerOptions.continuesToPlayInBackground;
-      if (options.category == null)
+      }
+      if (options.continuesToPlayInBackground == null) {
+        options.continuesToPlayInBackground =
+          defaultPlayerOptions.continuesToPlayInBackground;
+      }
+      if (options.category == null) {
         options.category = defaultPlayerOptions.category;
-      if (options.mixWithOthers == null)
+      }
+      if (options.mixWithOthers == null) {
         options.mixWithOthers = defaultPlayerOptions.mixWithOthers;
+      }
 
       this._options = options;
     }
@@ -61,11 +66,15 @@ class Player extends EventEmitter {
     this._playerId = playerId++;
     this._reset();
 
-    const appEventEmitter = Platform.OS === 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
+    const appEventEmitter =
+      Platform.OS === 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
 
-    appEventEmitter.addListener(`RCTAudioPlayerEvent:${this._playerId}`, (payload: Event) => {
-      this._handleEvent(payload.event, payload.data);
-    });
+    appEventEmitter.addListener(
+      `RCTAudioPlayerEvent:${this._playerId}`,
+      (payload: Event) => {
+        this._handleEvent(payload.event, payload.data);
+      },
+    );
   }
 
   _reset() {
@@ -141,7 +150,7 @@ class Player extends EventEmitter {
     const tasks = [];
 
     // Prepare player
-    tasks.push((next) => {
+    tasks.push(next => {
       RCTAudioPlayer.prepare(this._playerId, this._path, this._options, next);
     });
 
@@ -173,13 +182,13 @@ class Player extends EventEmitter {
 
     // Make sure player is prepared
     if (this._state === MediaStates.IDLE) {
-      tasks.push((next) => {
+      tasks.push(next => {
         this.prepare(next);
       });
     }
 
     // Start playback
-    tasks.push((next) => {
+    tasks.push(next => {
       RCTAudioPlayer.play(this._playerId, next);
     });
 
@@ -209,7 +218,7 @@ class Player extends EventEmitter {
         callback(err, true);
       });
     } else {
-      this.play((err) => {
+      this.play(err => {
         callback(err, false);
       });
     }
@@ -258,7 +267,7 @@ class Player extends EventEmitter {
 
   set volume(value) {
     this._volume = value;
-    this._setIfInitialized({ volume: value });
+    this._setIfInitialized({volume: value});
   }
 
   set currentTime(value) {
@@ -267,17 +276,17 @@ class Player extends EventEmitter {
 
   set wakeLock(value) {
     this._wakeLock = value;
-    this._setIfInitialized({ wakeLock: value });
+    this._setIfInitialized({wakeLock: value});
   }
 
   set looping(value) {
     this._looping = value;
-    this._setIfInitialized({ looping: value });
+    this._setIfInitialized({looping: value});
   }
 
   set speed(value) {
     this._speed = value;
-    this._setIfInitialized({ speed: value });
+    this._setIfInitialized({speed: value});
   }
 
   get currentTime() {
